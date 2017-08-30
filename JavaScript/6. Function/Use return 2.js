@@ -5,3 +5,5 @@ function get_member() {
 }
 
 console.log(get_member());
+
+// gumgum and bobbob are not appear because the function has been already returned.
