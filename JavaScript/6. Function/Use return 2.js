@@ -1,4 +1,4 @@
-funciton get_member() {
+function get_member() {
   return 'sangumee';
   return 'gumgum';
   return 'bobbob';
