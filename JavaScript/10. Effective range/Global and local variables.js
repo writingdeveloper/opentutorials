@@ -19,3 +19,5 @@ function fscope() {
 
 fscope();
 console.log('함수밖' + vscope);
+
+// If not use var it will be global function
