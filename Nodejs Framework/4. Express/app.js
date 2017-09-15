@@ -8,6 +8,10 @@ app.get('/', function(req, res) {
   res.send("Hello Home Page");
 });
 
+app.get('/route',function(req,res){
+  res.send('Hello Router')
+});
+
 app.get('/login', function(req, res) {
   res.send('<h1>Login Please</h1>');
 });
