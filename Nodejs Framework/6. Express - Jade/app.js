@@ -1,8 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-
+app.set('view engine', 'jade');
+app.set('views','./views');
 app.use(express.static(path.join(__dirname,'public')));
+
+app.get('/template',function(req,res){
+  res.render('temp');
+});
 
 app.get('/', function(req, res){
     res.send('Hello home page');;
