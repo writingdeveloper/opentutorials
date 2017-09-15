@@ -8,7 +8,6 @@ app.use(express.static(path.join(__dirname,'public')));
 app.get('/template',function(req,res){
   res.render('temp');
 });
-
 app.get('/', function(req, res){
     res.send('Hello home page');;
 });
