@@ -2,12 +2,13 @@ var express = require('express');
 var app = express();
 var path = require('path');
 app.locals.pretty=true;
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/template',function(req,res){
-  res.render('temp');
+  res.render('temp',{time:Date(),title:'Pug'});
 });
 app.get('/', function(req, res){
     res.send('Hello home page');;
