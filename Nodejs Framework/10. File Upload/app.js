@@ -11,6 +11,7 @@ var _storage = multer.diskStorage({
   }
 })
 
+
 var upload = multer({
   storage: _storage
 })
@@ -23,6 +24,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use('/user', express.static('uploads'));
 
 app.get('/upload', function(req, res) {
   res.render('upload');
