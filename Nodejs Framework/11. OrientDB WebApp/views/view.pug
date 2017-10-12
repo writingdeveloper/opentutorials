@@ -14,8 +14,15 @@ html
       if topic
         h2= topic.title
         = topic.description
+        div= 'by '+topic.author
       else
         h2 Welcome
         | This is Server Side JavaScript Programming Language.
-    div
-      a(href='/topic/new') New
+    li
+      a(href='/topic/add') add
+    if topic  
+      - rid = encodeURIComponent(topic['@rid'])
+      li  
+        a(href='/topic/'+rid+'/edit') edit
+      li  
+        a(href='/topic/'+rid+'/delete') delete
