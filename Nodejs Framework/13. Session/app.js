@@ -9,12 +9,12 @@ app.use(session({
 }));
 
 app.get('/count', function(req, res) {
-  req.session.count=1;
-  res.send('hi session');
-});
-
-app.get('/tmp', function(req,res){
-  res.send('result : '+req.session.count);
+  if (req.session.count) {
+    req.session.count++;
+  } else {
+    req.session.count = 1;
+  }
+  res.send('Count : ' + req.session.count);
 });
 
 app.listen(3000, function() {
