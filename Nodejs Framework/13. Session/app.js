@@ -18,7 +18,16 @@ app.get('/count', function(req, res) {
 });
 
 app.get('/auth/login', function(req,res){
-  res.send('Hello Login');
+  var output=`
+  <form>
+    <p>
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+    </p>
+  </form>
+  `
+
+  res.send(output);
 });
 
 app.listen(3000, function() {
