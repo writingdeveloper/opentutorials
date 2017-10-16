@@ -50,7 +50,9 @@ app.get('/cart/:id', function(req, res) {
     cart[id] = 0;
   }
   cart[id] = parseInt(cart[id]) + 1;
-  res.cookie('cart', cart,{signed:true});
+  res.cookie('cart', cart, {
+    signed: true
+  });
   res.redirect('/cart');
 });
 
@@ -61,7 +63,9 @@ app.get('/count', function(req, res) {
     var count = 0;
   }
   count = count + 1;
-  res.cookie('count', count,{signed:true});
+  res.cookie('count', count, {
+    signed: true
+  });
   res.send('count : ' + count);
 });
 
