@@ -14,7 +14,7 @@ app.get('/count', function(req, res) {
 });
 
 app.get('/tmp', function(req,res){
-  res.send('result'+req.session.count):
+  res.send('result : '+req.session.count);
 });
 
 app.listen(3000, function() {
