@@ -17,6 +17,10 @@ app.get('/count', function(req, res) {
   res.send('Count : ' + req.session.count);
 });
 
+app.get('/auth/login', function(req,res){
+  send('Hello Login');
+});
+
 app.listen(3000, function() {
   console.log('Connected 3000 Port!');
 });
