@@ -8,6 +8,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.get('/count', function(req, res) {
+  res.send('hi session');
+});
+
 app.listen(3000, function() {
   console.log('Connected 3000 Port!');
 });
