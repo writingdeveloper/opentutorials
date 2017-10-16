@@ -18,7 +18,7 @@ app.get('/count', function(req, res) {
 });
 
 app.get('/auth/login', function(req,res){
-  send('Hello Login');
+  res.send('Hello Login');
 });
 
 app.listen(3000, function() {
