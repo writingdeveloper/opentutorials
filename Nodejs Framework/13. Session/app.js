@@ -3,10 +3,10 @@ var session = require('express-session');
 var app = express();
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: '2983718947@ROFKAMVVAAKDIWY',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
 app.listen(3000, function() {
   console.log('Connected 3000 Port!');
