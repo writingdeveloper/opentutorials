@@ -1,7 +1,7 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var OrientoOrientoStore = require('connect-oriento')(session);
+var OrientoStore = require('connect-oriento')(session);
 var app = express();
 app.use(bodyParser.urlencoded({
   extended: false
@@ -11,8 +11,8 @@ app.use(session({
   secret: '2983718947@ROFKAMVVAAKDIWY',
   resave: false,
   saveUninitialized: true,
-  new OrientoStore({
-    server: 'host=localhost&port=2424&username=root&password=password123&db=test'
+  store: new OrientoStore({
+    server: 'host=localhost&port=2424&username=root&password=password123&db=o2'
   })
 }));
 
@@ -56,7 +56,9 @@ app.post('/auth/login', function(req, res) {
   var pwd = req.body.password;
   if (uname === user.username && pwd === user.password) {
     req.session.displayName = user.displayName;
+    req.session.save(function() {
     res.redirect('/welcome');
+  });
   } else {
     res.send('Login Failed! <a href="/auth/login">Login</a>');
   }
