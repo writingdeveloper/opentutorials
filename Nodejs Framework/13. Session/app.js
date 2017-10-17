@@ -21,6 +21,25 @@ app.get('/count', function(req, res) {
   res.send('Count : ' + req.session.count);
 });
 
+app.get('/auth/logout', function(req,res){
+  delete req.session.displayName;
+  res.redirect('/welcome');
+});
+
+app.get('/welcome', function(req, res) {
+  if(req.session.displayName){
+    res.send(`
+      <h1>hello, ${req.session.displayName}</h1>
+      <a href="/auth/logout">Logout</a>
+      `);
+  } else {
+    res.send(`
+      <h1>Welcome</h1>
+      <a href="/auth/login">Login</a>
+      `);
+  }
+});
+
 app.post('/auth/login', function(req, res) {
   var user = {
     username: 'sangumee',
