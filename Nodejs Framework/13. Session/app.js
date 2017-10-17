@@ -1,7 +1,7 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var FileStore = require('session-file-store')(session);
+var OrientoOrientoStore = require('connect-oriento')(session);
 var app = express();
 app.use(bodyParser.urlencoded({
   extended: false
@@ -11,7 +11,9 @@ app.use(session({
   secret: '2983718947@ROFKAMVVAAKDIWY',
   resave: false,
   saveUninitialized: true,
-  store: new FileStore()
+  new OrientoStore({
+    server: 'host=localhost&port=2424&username=root&password=password123&db=test'
+  })
 }));
 
 app.get('/count', function(req, res) {
@@ -23,13 +25,15 @@ app.get('/count', function(req, res) {
   res.send('Count : ' + req.session.count);
 });
 
-app.get('/auth/logout', function(req,res){
+app.get('/auth/logout', function(req, res) {
   delete req.session.displayName;
-  res.redirect('/welcome');
+  req.session.save(function() {
+    res.redirect('/welcome');
+  });
 });
 
 app.get('/welcome', function(req, res) {
-  if(req.session.displayName){
+  if (req.session.displayName) {
     res.send(`
       <h1>hello, ${req.session.displayName}</h1>
       <a href="/auth/logout">Logout</a>
