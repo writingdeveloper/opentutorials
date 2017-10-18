@@ -3,6 +3,9 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var bodyParser = require('body-parser');
 var bkfd2Password = require("pbkdf2-password");
+var passport = require('passport')
+var LocalStrategy = require('passport-local').Strategy;
+
 var hasher = bkfd2Password();
 
 var app = express();
