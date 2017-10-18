@@ -49,6 +49,43 @@ app.get('/welcome', function(req, res) {
     `);
   }
 });
+
+passport.serializeUser(function(user, done) {
+  console.log('serializeUser', user);
+  done(null, user.authId);
+});
+passport.deserializeUser(function(id, done) {
+  console.log('deserializeUser', id);
+  for(var i=0; i<users.length; i++){
+    var user = users[i];
+    if(user.authId === id){
+      return done(null, user);
+    }
+  }
+  done('There is no user.');
+});
+
+passport.use(new LocalStrategy(
+  function(username, password, done){
+    var uname = username;
+    var pwd = password;
+    for(var i=0; i<users.length; i++){
+      var user = users[i];
+      if(uname === user.username) {
+        return hasher({password:pwd, salt:user.salt}, function(err, pass, salt, hash){
+          if(hash === user.password){
+            console.log('LocalStrategy', user);
+            done(null, user);
+          } else {
+            done(null, false);
+          }
+        });
+      }
+    }
+    done(null, false);
+  }
+));
+
 app.post('/auth/login', passport.authenticate('local', {
   successRedirect: '/welcome',
   failureRedirect: '/auth/login',
