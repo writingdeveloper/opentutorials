@@ -151,9 +151,10 @@ app.get('/auth/login', function(req, res) {
       <input type="submit">
     </p>
   </form>
+  <a href="/auth/facebook">Facebook</a>
   `;
   res.send(output);
 });
-app.listen(3003, function() {
-  console.log('Connected 3003 port!!!');
+app.listen(3000, function() {
+  console.log('Connected 3000 port!!!');
 });
