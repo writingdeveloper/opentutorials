@@ -85,6 +85,7 @@ passport.use(new LocalStrategy(
     done(null, false);
   }
 ));
+
 passport.use(new FacebookStrategy({
     clientID: '152673615470530',
     clientSecret: '9fd2e54f4292aa8913b996a33bdce734',
