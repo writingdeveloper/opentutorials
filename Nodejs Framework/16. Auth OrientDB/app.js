@@ -8,6 +8,17 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var hasher = bkfd2Password();
 
+// Connect OrientDB
+
+var OrientDB = require('orientjs');
+var server = OrientDB({
+  host: 'localhost',
+  port: 2424,
+  username: 'root',
+  password: 'password123' // Bad Method
+});
+var db = server.use('o2');
+
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
@@ -145,23 +156,33 @@ var users = [
     displayName:'sangumee'
   }
 ];
-app.post('/auth/register', function(req, res){
-  hasher({password:req.body.password}, function(err, pass, salt, hash){
+app.post('/auth/register', function(req, res) {
+  hasher({
+    password: req.body.password
+  }, function(err, pass, salt, hash) {
     var user = {
-      authId:'local:'+req.body.username,
-      username:req.body.username,
-      password:hash,
-      salt:salt,
-      displayName:req.body.displayName
+      authId: 'local:' + req.body.username,
+      username: req.body.username,
+      password: hash,
+      salt: salt,
+      displayName: req.body.displayName
     };
-    users.push(user);
-    req.login(user, function(err){
-      req.session.save(function(){
-        res.redirect('/welcome');
-      });
-    });
-  });
+    var sql = 'INSERT INTO user (authId,username,password,salt,displayName) VALUES(:authId,:username,:password,:salt,:displayName)';
+   db.query(sql, {
+     params:user
+   }).then(function(results){
+     req.login(user, function(err){
+       req.session.save(function(){
+         res.redirect('/welcome');
+       });
+     });
+   }, function(error){
+     console.log(error);
+     res.status(500);
+   });
+ });
 });
+
 app.get('/auth/register', function(req, res){
   var output = `
   <h1>Register</h1>
