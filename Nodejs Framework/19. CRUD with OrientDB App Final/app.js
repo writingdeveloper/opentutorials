@@ -215,7 +215,7 @@ app.get('/auth/register', function(req, res){
 
 
 app.get('/auth/login', function(req, res){
-  res.render('');
+  res.render('auth/login');
 });
 app.listen(3000, function(){
   console.log('Connected 3000 port!!!');
