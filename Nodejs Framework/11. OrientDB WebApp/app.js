@@ -49,7 +49,7 @@ app.post('/upload', upload.single('userfile'), function(req, res) {
 app.get('/topic/add', function(req, res) {
   var sql = 'SELECT FROM topic';
   db.query(sql).then(function(topics){
-    res.render('add', {topics: topics});
+    res.render('topic/add', {topics: topics});
   });
 });
 
@@ -75,7 +75,7 @@ app.get('/topic/:id/edit', function(req, res) {
   db.query(sql).then(function(topics){
     var sql = 'SELECT FROM topic WHERE @rid=:rid';
     db.query(sql, {params:{rid:id}}).then(function(topic){
-      res.render('edit', {topics:topics, topic:topic[0]});
+      res.render('topic/edit', {topics:topics, topic:topic[0]});
     });
   });
 });
@@ -103,7 +103,7 @@ app.post('/topic/:id/edit', function(req, res){
    db.query(sql).then(function(topics){
      var sql = 'SELECT FROM topic WHERE @rid=:rid';
      db.query(sql, {params:{rid:id}}).then(function(topic){
-       res.render('delete', {topics:topics, topic:topic[0]});
+       res.render('topic/delete', {topics:topics, topic:topic[0]});
      });
    });
  });
@@ -127,10 +127,10 @@ app.get(['/topic', '/topic/:id'], function(req, res){
      if(id){
        var sql = 'SELECT FROM topic WHERE @rid=:rid';
        db.query(sql, {params:{rid:id}}).then(function(topic){
-         res.render('view', {topics:topics, topic:topic[0]});
+         res.render('topic/view', {topics:topics, topic:topic[0]});
        });
      } else {
-       res.render('view', {topics:topics});
+       res.render('topic/view', {topics:topics});
      }
    });
 
