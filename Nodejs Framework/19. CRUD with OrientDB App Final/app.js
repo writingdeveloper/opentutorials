@@ -7,6 +7,7 @@ var bkfd2Password = require("pbkdf2-password");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var path = require('path');
 var hasher = bkfd2Password();
 var OrientDB = require('orientjs');
 
@@ -17,7 +18,7 @@ var server = OrientDB({
   password: 'password123'
 });
 
-app.set('views', './views/auth');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 var db = server.use('o2');
@@ -192,27 +193,10 @@ app.post('/auth/register', function(req, res){
     });
   });
 });
-app.get('/auth/register', function(req, res){
-  var output = `
-  <h1>Register</h1>
-  <form action="/auth/register" method="post">
-    <p>
-      <input type="text" name="username" placeholder="username">
-    </p>
-    <p>
-      <input type="password" name="password" placeholder="password">
-    </p>
-    <p>
-      <input type="text" name="displayName" placeholder="displayName">
-    </p>
-    <p>
-      <input type="submit">
-    </p>
-  </form>
-  `;
-  res.send(output);
-});
 
+app.get('/auth/register', function(req, res){
+  res.render('auth/register');
+});
 
 app.get('/auth/login', function(req, res){
   res.render('auth/login');
