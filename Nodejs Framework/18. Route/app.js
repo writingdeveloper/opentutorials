@@ -1,34 +1,25 @@
-var express=require('express');
-var app=express();
+var express = require('express');
+var app = express();
 
-var router=express.Router();
-router.get('/r1',function(req,ree){
+var p1 = express.Router();
+p1.get('/r1', function(req, res) {
   res.send('Hello /p1/r1');
 });
-router.get('/r2', function(req,res){
+p1.get('/r2', function(req, res) {
   res.send('Hello /p1/p2');
 });
-app.use('/p1', router);
+app.use('/p1', p1);
 
-
-app.get('/p1/r1', function(req,res){
-  res.send('Hello /p1/r1');
-});
-
-app.get('/p1/r2', function(req,res){
-  res.send('Hello /p1/r2');
-});
-
-app.get('/p2/r1', function(req,res){
+var p2=express.Router();
+p2.get('/r1', function(req, res) {
   res.send('Hello /p2/r1');
 });
 
-app.get('/p2/r2', function(req,res){
+p2.get('/r2', function(req, res) {
   res.send('Hello /p2/r2');
 });
+app.use('/p2', p2);
 
-
-
-app.listen(3000, function(){
+app.listen(3000, function() {
   console.log('connected');
 });
