@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var session = require('express-session');
 var OrientoStore = require('connect-oriento')(session);
 var bodyParser = require('body-parser');
@@ -8,14 +9,19 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var hasher = bkfd2Password();
 var OrientDB = require('orientjs');
+
 var server = OrientDB({
   host: 'localhost',
   port: 2424,
   username: 'root',
   password: 'password123'
 });
+
+app.set('views', './views/auth');
+app.set('view engine', 'pug');
+
 var db = server.use('o2');
-var app = express();
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   secret: '1234DSFs@adf1234!@#$asd',
@@ -206,23 +212,10 @@ app.get('/auth/register', function(req, res){
   `;
   res.send(output);
 });
+
+
 app.get('/auth/login', function(req, res){
-  var output = `
-  <h1>Login</h1>
-  <form action="/auth/login" method="post">
-    <p>
-      <input type="text" name="username" placeholder="username">
-    </p>
-    <p>
-      <input type="password" name="password" placeholder="password">
-    </p>
-    <p>
-      <input type="submit">
-    </p>
-  </form>
-  <a href="/auth/facebook">facebook</a>
-  `;
-  res.send(output);
+  res.render('');
 });
 app.listen(3000, function(){
   console.log('Connected 3000 port!!!');
