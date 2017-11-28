@@ -93,8 +93,5 @@ module.exports = function(app) {
       })
     }
   ));
-
-
-
   return passport;
 }

@@ -17,7 +17,7 @@ module.exports = function() {
     resave: false,
     saveUninitialized: true,
     store: new OrientoStore({
-      server: 'host=localhost&port=2424&username=root&password=password123&db=o2'
+      server: 'host=sangumserver.iptime.org&port=2424&username=root&password=password123&db=crudOriginal'
     })
   }));
   return app;

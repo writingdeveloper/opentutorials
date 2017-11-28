@@ -3,12 +3,12 @@ var app = require('./config/express')();
 // Connect OrientDB
 var OrientDB = require('orientjs');
 var server = OrientDB({
-  host: 'localhost',
+  host: 'sangumserver.iptime.org',
   port: 2424,
   username: 'root',
   password: 'password123' // Bad Method
 });
-var db = server.use('o2');
+var db = server.use('crudOriginal');
 
 
 var passport = require('./config/passport')(app);
