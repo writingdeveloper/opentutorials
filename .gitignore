@@ -71,3 +71,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Developer Setting
+.db.template.js
