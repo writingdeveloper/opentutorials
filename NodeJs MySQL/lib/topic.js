@@ -24,7 +24,7 @@ exports.page = function (request, response) {
         if (error) {
             throw error;
         }
-        db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=?`, [queryData.id], function (error2, topic) {
+        var query = db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=?`, [queryData.id], function (error2, topic) {
             if (error2) {
                 throw error2;
             }
@@ -45,6 +45,7 @@ exports.page = function (request, response) {
                 <input type="submit" value="delete">
               </form>`
             );
+            console.log(query);
             response.writeHead(200);
             response.end(html);
         })
