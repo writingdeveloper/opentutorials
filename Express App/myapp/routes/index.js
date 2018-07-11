@@ -12,14 +12,18 @@ router.get('/', function(req, res, next) {
 
   request({
     url: url + queryParams,
-    method : 'GET'
-  }, function(error, response, body){
+    method: 'GET'
+  }, function (error, response, body) {
     console.log('Status', response.statusCode);
     console.log('Headers', JSON.stringify(response.headers));
-    console.log('Response Received', body);
-  });
+    console.log('Reponse received', body);
 
-  res.render('index', {title : 'Express'});
+    var html = res.render('index' , { 
+      title : 'express',
+      addrs: body 
+    });
+    console.log(html);
+  });
 });
 
 router.get('/login', function(req,res, next){
