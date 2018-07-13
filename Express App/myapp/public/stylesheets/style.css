@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+dataTime{
+  color: green;
+  font-weight: bold;
+}
+
+cityName{
+  color:red;
+  font-weight: bold;
+}
+
+img{
+}
